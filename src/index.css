@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (max-width:998px){
+  .currency_choose{
+    margin-right:-1.5rem !important
+  }
+  
+}
