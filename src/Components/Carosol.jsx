@@ -34,7 +34,7 @@ const Carosol = () => {
 
      const [Trending,setTrending]=useState([]);
 
-  console.log(Trending);
+//   console.log(Trending);
       //useContext hook using to get the currency data
       const {curr} = CryptoState();
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import CoinsTable from '../Components/CoinsTable';
 import Topcarosol from "../Components/Topcarosol";
 
 const Homepage = () => {
@@ -6,6 +7,7 @@ const Homepage = () => {
            <>
            {/* //the top banner part */}
             <Topcarosol/>
+            <CoinsTable/>
 
 
            </>

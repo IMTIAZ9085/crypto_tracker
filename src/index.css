@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+html{
+  font-size: 70.5%;
+}
+
 @media (max-width:998px){
   .currency_choose{
     margin-right:-1.5rem !important

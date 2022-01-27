@@ -38,22 +38,28 @@ const Topcarosol = () => {
             <Container className={classes.container}>
              <div className={classes.heading}>
 
-            <Typography variant="h2"
+            <Typography variant="h4"
             style={{ 
                   fontWeight: 'bold',
-                  color:"gold",
-                  marginBottom:15,
+                  color:"#f5f5f5",
+                  marginBottom:10,
+                  marginTop:"-5rem",
+                  textAlign: 'center'
                   // marginLeft:"-750px"
             }}
             >
-            Crypto Tracker
+           
+            Welcome to  Crypto Tracker! Take one step forward into the world of Blockchain and Cryptocurrency.
+
+
             </Typography>
     
             <Typography variant="h5"
             style={{ 
                   fontWeight: 'bold',
-                  marginBottom:15,
-                  color:"darkgray",
+                  marginBottom:10,
+                  color:"white",
+                  textAlign: 'center'
                   // marginLeft:"-750px"
             }}
             >
