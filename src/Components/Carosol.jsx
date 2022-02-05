@@ -36,7 +36,7 @@ const Carosol = () => {
 
 //   console.log(Trending);
       //useContext hook using to get the currency data
-      const {curr} = CryptoState();
+      const {curr,Logo} = CryptoState();
 
       //fetching the trending coins data from the api using axios
       const fetchData=async() =>{
@@ -69,13 +69,13 @@ const Carosol = () => {
 
                     <span>{coin.symbol}
                     &nbsp;
-                  <span style={{fontWeight:"bold",color:"red"}}>
+                  <span style={{fontWeight:"bold",color:profit>0?"rgba(14,203,129)":"red",}}>
                         {profit && "+"} {coin.price_change_percentage_24h.toFixed(2)}
                   </span>
                   </span> 
                 <br/>
                   <span style={{fontSize:22,fontWeight:500, color:"gold"}}>
-                        {coin.symbol} {numberWithCommas(coin.current_price.toFixed(2))}
+                      {Logo}  {coin.symbol} {numberWithCommas(coin.current_price.toFixed(2))}
                   </span>
                   
                   </Link>

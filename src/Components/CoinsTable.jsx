@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { makeStyles } from "@material-ui/core/styles";
+import {Pagination} from "@material-ui/lab";
 import { CoinList } from '../Config/api';
 import {CryptoState} from "../CryptoContext";
-import {TableCell,TableRow,TableHead,Table, Container,TableContainer, Typography,TextField ,ThemeProvider,createTheme, LinearProgress, TableBody} from '@material-ui/core';
+import {TableCell,TableRow,TableHead,Table, Container,TableContainer, Typography,TextField ,ThemeProvider,createTheme, LinearProgress, TableBody, TablePagination} from '@material-ui/core';
 import { Classnames } from 'react-alice-carousel';
 import { useHistory } from 'react-router-dom';
+import {numberWithCommas} from "./Carosol";
 
 
 const dark=createTheme({
@@ -38,23 +40,27 @@ const useStyles = makeStyles({
 
 
 const classes=useStyles();
-
-      const [Coin, setCoin] = useState([]);
-      const [loading, setloading] = useState(false);
+      // //for state of coin data from api
+      // const [Coin, setCoin] = useState([]);
+      // //if the page is not properly loaded
+      // const [loading, setloading] = useState(false);
+      //for searching spacific coin
       const [Search, setSearch] = useState("");
+      //for pagination
+      const [Page, setPage] = useState(1);
       const history=useHistory();
 
-      const {curr}= CryptoState();
+      const {curr,Logo,Coin,loading,fetchData}= CryptoState();
 
       //fetching the data form the api
-      const fetchData = async()=>{
-            setloading(true);
-            const {data}= await axios.get(CoinList(curr));
-            setCoin(data);
-            setloading(false);
+      // const fetchData = async()=>{
+      //       setloading(true);
+      //       const {data}= await axios.get(CoinList(curr));
+      //       setCoin(data);
+      //       setloading(false);
             
-            console.log(Coin);
-      }
+      //       console.log(Coin);
+      // }
 
       useEffect(() => {
       fetchData();
@@ -79,7 +85,7 @@ const SearchProcess=()=>{
 
   <Typography
    variant="h4"
-   style={{margin:18}}
+   style={{margin:18,color:"gold"}}
    >
       All Cryptocurrencies Market Values
   </Typography>
@@ -99,15 +105,15 @@ const SearchProcess=()=>{
       ):(
             <>
             <Table style={{marginBottom:30}}>
-                  <TableHead style={{backgroundColor:"gold"}}>
+                  <TableHead style={{backgroundColor:"grey",}}>
                   <TableRow>
                         {["Coin","price","24 Change","Market Cap"].map((head)=>(
                               <TableCell
-                              style={{color:"black",
+                              style={{color:"white",
                               fontWeight:"600",
                               fontSize:"1.5rem"}}
                               key={head}
-                              align={head=="Coin"?"":"right"}>
+                              align={head==="Coin"?"":"right"}>
                               {head}
                               </TableCell>
                         ))
@@ -116,7 +122,10 @@ const SearchProcess=()=>{
                   </TableHead>
 
                   <TableBody>
-                  {SearchProcess().map((row)=>{
+
+                  {SearchProcess()
+                  .slice((Page-1) * 10,(Page-1)*10 +10)
+                  .map((row)=>{
                         const profit=row.price_change_percentage_24h>0;
                         return (
                               <TableRow
@@ -146,19 +155,58 @@ const SearchProcess=()=>{
                                     </div>
 
                                     </TableCell>
+                               
+                               <TableCell
+                               align="right"
+                               style={{fontSize:15}}
+                               > 
 
+                               {Logo}{" "}{numberWithCommas(row.current_price.toFixed(2))}
+
+                               </TableCell>
                                     
+                                    <TableCell
+                                    align="right"
+                                     style={{fontSize:15,
+                                     color:profit>0?"rgba(14,203,129)":"red",
+                                     fontWeight: "bold"
+                                     }}>
+                                          {profit && "+"}
+                                          {row.price_change_percentage_24h.toFixed(2)}%
+                                    </TableCell>
+
+                                    <TableCell
+                                    align="right"
+                                     style={{fontSize:15,
+                                     fontWeight: "bold"
+                                     }}>
+                                        {Logo}{" "}{numberWithCommas(row.market_cap.toString().slice(0,-6))}M
+                                    </TableCell>
                               </TableRow>
                         )
                   })}
                   </TableBody>
             </Table>
-
             </>
       )
 }
 </TableContainer>
  
+ <Pagination
+ count={(SearchProcess()?.length/10).toFixed(0)}
+ classes={{ul:classes.pagination}}
+ style={{
+       width: '100%',
+       display: 'flex',
+       justifyContent: 'center',
+       padding:25,
+ }}
+       onChange={(_,value)=>{
+             setPage(value);
+             window.scroll(0,460);
+       }}
+ />
+   
   </Container>
 </ThemeProvider>
        

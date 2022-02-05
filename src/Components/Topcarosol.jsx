@@ -18,6 +18,7 @@ const Topcarosol = () => {
                  display:"flex",
                  flexDirection:"column",
                  paddingTop:25,
+            //      linerGradient:"black black",
                  justifyContent:"space-around",
             //      border:"1px solid #fff"
            },
@@ -34,7 +35,8 @@ const Topcarosol = () => {
       const classes=useStyles();
 
       return (
-            <div className={classes.banner}>
+            <div className={classes.banner}
+           >
             <Container className={classes.container}>
              <div className={classes.heading}>
 

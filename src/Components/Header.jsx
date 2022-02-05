@@ -4,6 +4,8 @@ import {AppBar, Container,Toolbar, Typography,MenuItem,Select
 import { makeStyles } from '@material-ui/styles';
 import {useHistory} from "react-router-dom";
 import { CryptoState } from '../CryptoContext';
+import AuthModal from './Authentication/AuthModal';
+
 
 
 const useStyles = makeStyles(()=>({
@@ -21,7 +23,7 @@ const history=useHistory();
 
 const classes=useStyles();
 
-const {curr,setcurr}=CryptoState();
+const {curr,setcurr,User}=CryptoState();
 
 const dark=createTheme({
       palette: {
@@ -57,7 +59,7 @@ const dark=createTheme({
                            <MenuItem value={"USD"}>USD</MenuItem>
                            <MenuItem value={"INR"}>INR</MenuItem>
                            </Select>
-
+                     {User? "Logout":<AuthModal/>}
 
                         </Toolbar>
                   </Container>
