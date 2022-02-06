@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import {useHistory} from "react-router-dom";
 import { CryptoState } from '../CryptoContext';
 import AuthModal from './Authentication/AuthModal';
+import UserSidebar from './Authentication/UserSidebar';
 
 
 
@@ -59,7 +60,7 @@ const dark=createTheme({
                            <MenuItem value={"USD"}>USD</MenuItem>
                            <MenuItem value={"INR"}>INR</MenuItem>
                            </Select>
-                     {User? "Logout":<AuthModal/>}
+                     {User?<UserSidebar/>:<AuthModal/>}
 
                         </Toolbar>
                   </Container>

@@ -12,7 +12,7 @@ const Login = ({handleClose}) => {
             if(!Email && !Password) {
                   setAlert({
                         open: true,
-                        message:"Filled all the Fields",
+                        message:"Please fill all the Fields",
                         type:"error"
                   });
                   return;

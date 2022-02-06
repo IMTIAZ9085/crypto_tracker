@@ -1,7 +1,11 @@
 import React,{ useState} from 'react';
-import {Typography,Box,Modal,Button, AppBar,Fade, Tabs, Tab} from '@material-ui/core';
+import {Typography,Box,Modal,Button, AppBar,Fade, Tabs, Tab, makeStyles} from '@material-ui/core';
 import Login from './Login';
 import SignUp from './SignUp';
+import GoogleButton from 'react-google-button';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { CryptoState } from '../../CryptoContext';
+import { auth } from '../../Firebase_setup';
 // import  from '@mui/material/Box';
 // import Modal from '@mui/material/Modal';
 // import Button from '@mui/material/Button';
@@ -19,8 +23,24 @@ const style = {
   color:"white",
   p: 4,
 };
+const useStyles = makeStyles(({
+
+  googleLogin:{
+    padding:10,
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+    gap:20,
+    paddingTop:0,
+    fontSize:20
+  }
+
+}))
+
 
 const AuthModal=()=> {
+  const classes=useStyles();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -31,7 +51,34 @@ const AuthModal=()=> {
   const handleChange=(event,newValue) => {
     setvalue(newValue);
   };
-console.log(value);
+
+// console.log(value);
+
+const {setAlert}= CryptoState(); 
+
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle=()=>{
+ signInWithPopup(auth,googleProvider).then(res=>{
+   setAlert({
+     open: true,
+     message:`Sign up Successfully. Welcome ${res.user.email}`,
+     type: 'success'
+   });
+
+   handleClose();
+
+ }).catch(e=>{
+  setAlert({
+    open: true,
+    message:e.message,
+    type: 'error'
+  });
+
+  return;
+ })
+};
+
+
   return (
     <div>
       <Button variant="contained" style={{
@@ -75,7 +122,15 @@ console.log(value);
         
           {value==0 && <Login handleClose={handleClose}/>}
           {value==1 && <SignUp handleClose={handleClose}/>}
-           
+
+          <Box className={classes.googleLogin}> 
+          <span> OR</span>
+           <GoogleButton
+             style={{width:"100%",outline: "none",}}
+             onClick={signInWithGoogle}
+           />
+          </Box>
+         
 
         </Box>
       </Modal>

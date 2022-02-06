@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { onAuthStateChanged } from 'firebase/auth';
+import { doc, onSnapshot } from 'firebase/firestore';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { CoinList } from './Config/api';
-import { auth } from './Firebase_setup';
+import { auth, database } from './Firebase_setup';
 
 //create context
 const Crypto = createContext();
@@ -26,6 +27,27 @@ const [Alert, setAlert] = useState({
 });
 
 
+//to set the watched coin and store it in firebase storage
+const [watchlist, setwatchlist] = useState([]);
+
+useEffect(() => {
+      if(User){
+       const coinRef= doc(database,"watchlist",User.uid); 
+      var unsub= onSnapshot(coinRef,(coin)=>{
+             if(coin.exists()){
+                   setwatchlist(coin.data().coins);
+             }else{
+                   console.log("no Items in watchlist");
+             }
+       });
+       return ()=>{
+            unsub();
+      };
+
+      }
+
+    
+}, [User]);
 
 
       const [curr, setcurr] = useState("INR");
@@ -59,7 +81,7 @@ const [Alert, setAlert] = useState({
             setcurr,Coin,
             loading,fetchData,
             Alert,setAlert,
-            User}}>{children}</Crypto.Provider>
+            User,watchlist}}>{children}</Crypto.Provider>
 }
 
 export default CryptoContext;
