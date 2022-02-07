@@ -21,5 +21,36 @@ html{
   .currency_choose{
     margin-right:-1.5rem !important
   }
+
+ .log{
+  margin-left: 22px !important;
+  margin-right: -8px !important;
+  font-size:.8rem!important;
+  height: 3rem !important;
+  width: 3rem !important;
+}
+.title{
+  font-size: 2rem !important;
+}
+
+TableContainer{
+  width: -20rem!important;
+}
+
+Tablerow{
+  width: -1rem!important;
+}
+
+TableCell{
+  width: 0.6rem!important;
+
+}
+
+
+
+/* .mainTitle{
+  height: 1rem !important;
+  width: 1rem !important;
+} */
   
 }

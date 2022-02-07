@@ -190,12 +190,12 @@ const classes=useStyles();
                               }}
                               >{Logo}
                              { numberWithCommas(coin.current_price.toFixed(2))}
-
+{/* 
                              <AiFillDelete
                                 style={{ fontSize:13,
                                 cursor: "pointer"}}
                               //   onClick={removeWatchlist(coin)}
-                             />
+                             /> */}
 
                             
                               </span>

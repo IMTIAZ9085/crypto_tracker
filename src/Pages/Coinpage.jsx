@@ -38,7 +38,13 @@ const Coinpage = () => {
            ]:{
                  flexDirection: 'column',
                  alignItems: 'center'
-           }
+           },
+           [
+            th.breakpoints.down("lg")
+      ]:{
+            flexDirection: 'column',
+            alignItems: 'center'
+      }
       },
      
       leftside:{
@@ -50,7 +56,7 @@ const Coinpage = () => {
             flexDirection: 'column',
             alignItems: 'center',
             marginTop:25,
-            borderRight:"2px solid grey"
+            // borderRight:"2px solid grey"
       },
       heading:{
       marginBottom:17,

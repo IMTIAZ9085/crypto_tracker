@@ -87,7 +87,9 @@ const signInWithGoogle=()=>{
         backgroundColor:"red",
         color: "white"
 
-      }} onClick={handleOpen}>Log in</Button>
+      }} onClick={handleOpen} 
+      className="log"
+      >Log in</Button>
       <Modal
         keepMounted
         open={open}

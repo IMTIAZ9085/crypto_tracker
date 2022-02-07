@@ -9,7 +9,7 @@ import UserSidebar from './Authentication/UserSidebar';
 
 
 
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles((theme)=>({
       title:{
             flex:1,
             fontWeight:"bold",
@@ -44,6 +44,7 @@ const dark=createTheme({
                           {/* //onclicking this it will redirect you to homepage */}
                            <Typography onClick={()=>history.push("/")}
                             className={classes.title}
+                        //     className="mainTitle"
                             varient="h6">
                                  Crypto Tracker
                            </Typography>
